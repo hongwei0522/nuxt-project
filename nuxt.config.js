@@ -1,7 +1,8 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
+  mode: 'universal',
+  // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Dashboard',
@@ -46,6 +47,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend (config, { isDev, isClient }) {
+      if (!isDev) {
+          config.output.publicPath = './_nuxt/'
+      }
+      return config;
+    },
     transpile: ['vue-echarts', 'resize-detector'],
     loaders: {
       sass: {
